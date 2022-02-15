@@ -22,7 +22,7 @@ public class Task {
     @OneToOne (cascade=CascadeType.ALL)
     private Agent assignee;
     private int timeSpentInMinutes;
-    @OneToMany (cascade=CascadeType.ALL)
+    @OneToMany (fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private List<Task> subTaskList;
 }
 

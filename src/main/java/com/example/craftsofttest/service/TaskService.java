@@ -2,6 +2,7 @@ package com.example.craftsofttest.service;
 
 import com.example.craftsofttest.model.Agent;
 import com.example.craftsofttest.model.Task;
+import com.example.craftsofttest.model.TaskStatus;
 import com.example.craftsofttest.repository.AgentRepository;
 import com.example.craftsofttest.repository.TaskRepository;
 import org.springframework.stereotype.Service;
@@ -85,6 +86,30 @@ public class TaskService {
             return true;
         } else {
             throw new Exception("Task not found");
+        }
+    }
+
+    //  --
+    public List<Task> filterTaskByAgent(String agentUserName) {
+        return taskRepository.findAllByAssignee_UserName(agentUserName);
+    }
+
+    public List<Task> filterTaskByStatus(String taskStatusValue) {
+        TaskStatus taskStatus = TaskStatus.valueOfText(taskStatusValue);
+        return taskRepository.findAllByTaskStatus(taskStatus);
+    }
+
+    public boolean updateTaskStatus(int taskId, String taskStatusValue) throws Exception {
+        TaskStatus taskStatus = TaskStatus.valueOfText(taskStatusValue);
+        System.out.println(taskStatus);
+        Optional<Task> byId = taskRepository.findById(taskId);
+        if (byId.isPresent()) {
+            byId.get().setTaskStatus(taskStatus);
+            System.out.println(byId.get());
+            System.out.println(taskRepository.save(byId.get()));
+            return true;
+        } else {
+            throw new Exception("No such task found.");
         }
     }
 }

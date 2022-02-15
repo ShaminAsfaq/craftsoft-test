@@ -54,7 +54,29 @@ public class TaskController {
         return ResponseEntity.ok().body(assigneeFlag);
     }
 
+    @GetMapping("/remove_assignee/{taskId}")
+    public ResponseEntity<Boolean> removeAssignee(HttpServletRequest httpServletRequest, @PathVariable int taskId) throws Exception {
+        boolean removeAssigneeFlag = taskService.removeAssignee(taskId);
+        return ResponseEntity.ok().body(removeAssigneeFlag);
+    }
 
+    @GetMapping("/set_task_status/{taskId}/{taskStatusValue}")
+    public ResponseEntity<Boolean> setTaskStatus(HttpServletRequest httpServletRequest, @PathVariable int taskId, @PathVariable String taskStatusValue) throws Exception {
+        boolean updateTaskStatusFlag = taskService.updateTaskStatus(taskId, taskStatusValue);
+        return ResponseEntity.ok().body(updateTaskStatusFlag);
+    }
+
+    @GetMapping("/filter_task_by_status/{taskStatusValue}")
+    public ResponseEntity<List<Task>> filterTaskByStatus(HttpServletRequest httpServletRequest, @PathVariable String taskStatusValue) {
+        List<Task> filterTaskByStatus = taskService.filterTaskByStatus(taskStatusValue);
+        return ResponseEntity.ok().body(filterTaskByStatus);
+    }
+
+    @GetMapping("/filter_task_by_agent/{agentUserName}")
+    public ResponseEntity<List<Task>> filterTaskByAgent(HttpServletRequest httpServletRequest, @PathVariable String agentUserName) {
+        List<Task> filterTaskByStatus = taskService.filterTaskByAgent(agentUserName);
+        return ResponseEntity.ok().body(filterTaskByStatus);
+    }
 }
 
 
