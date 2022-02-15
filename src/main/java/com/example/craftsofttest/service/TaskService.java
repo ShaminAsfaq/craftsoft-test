@@ -112,6 +112,10 @@ public class TaskService {
             throw new Exception("No such task found.");
         }
     }
+
+    public List<Task> saveAll(List<Task> all) {
+        return taskRepository.saveAll(all);
+    }
 }
 
 

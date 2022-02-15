@@ -94,10 +94,6 @@ public class TaskServiceTest {
         assertEquals(expectedMessage, foundMessage);
     }
 
-    /**
-     * There might be other better ways of Assertion when working with List of complex objects.
-     * This specific solution might or might not work all the time.
-     */
     @Test
     @DisplayName("GET_ALL")
     public void testGetAllTask() {
@@ -105,23 +101,25 @@ public class TaskServiceTest {
 
         Task task1 = new Task();
         task1.setName("Task 1");
+        task1.setSubTaskList(new ArrayList<>());
 
         Task task2 = new Task();
         task2.setName("Task 2");
+        task2.setSubTaskList(new ArrayList<>());
 
         Task task3 = new Task();
         task3.setName("Task 3");
+        task3.setSubTaskList(new ArrayList<>());
 
         expectedList.add(task1);
         expectedList.add(task2);
         expectedList.add(task3);
 
-        taskService.addTask(task1);
-        taskService.addTask(task2);
-        taskService.addTask(task3);
+        taskService.saveAll(expectedList);
 
         List<Task> foundList = taskService.getAllTask();
-        assertEquals(expectedList.containsAll(foundList), foundList.containsAll(expectedList));
+
+        assertEquals(expectedList, foundList);
     }
 
     @Test
@@ -129,11 +127,12 @@ public class TaskServiceTest {
     public void testGetTask() throws Exception {
         Task primaryTask = new Task();
         primaryTask.setName("Task 1");
+        primaryTask.setSubTaskList(new ArrayList<>());
 
         Task expectedTask = taskService.addTask(primaryTask);
         Task foundTask = taskService.getTaskById(expectedTask.getId());
 
-        assertEquals(expectedTask.getId(), foundTask.getId());
+        assertEquals(expectedTask, foundTask);
     }
 
     @Test
