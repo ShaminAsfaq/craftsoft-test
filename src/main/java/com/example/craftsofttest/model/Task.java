@@ -88,9 +88,6 @@ public class Task {
             return false;
         }
 
-        System.out.println(this);
-        System.out.println(other);
-        System.out.println("--");
         return true;
     }
 }

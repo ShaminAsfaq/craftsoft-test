@@ -20,7 +20,7 @@ public class AgentController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Agent> addAgent(HttpServletRequest httpServletRequest, @RequestBody Agent agent) {
+    public ResponseEntity<Agent> addAgent(HttpServletRequest httpServletRequest, @RequestBody Agent agent) throws Exception {
         Agent addAgent = agentService.addAgent(agent);
         return ResponseEntity.ok().body(addAgent);
     }

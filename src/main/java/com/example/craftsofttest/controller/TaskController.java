@@ -23,7 +23,7 @@ public class TaskController {
     @ApiOperation(
             value = "Add a task",
             notes = "Provide a Task to be saved",
-            response = ResponseEntity.class
+            response = Task.class
     )
     public ResponseEntity<Task> addTask(HttpServletRequest httpServletRequest,
                                         @ApiParam(value = "Task object to be saved in DB", required = true)
@@ -36,7 +36,7 @@ public class TaskController {
     @ApiOperation(
             value = "Update a task",
             notes = "Provide a Task to be updated",
-            response = ResponseEntity.class
+            response = Boolean.class
     )
     public ResponseEntity<Boolean> updateTask(HttpServletRequest httpServletRequest,
                                               @ApiParam(value = "Task object to be updated in DB", required = true)
@@ -48,7 +48,7 @@ public class TaskController {
     @GetMapping("/get/all")
     @ApiOperation(
             value = "Get all task as a list",
-            response = ResponseEntity[].class
+            response = Task[].class
     )
     public ResponseEntity<List<Task>> getAllTask(HttpServletRequest httpServletRequest) {
         List<Task> allTask = taskService.getAllTask();
@@ -59,7 +59,7 @@ public class TaskController {
     @ApiOperation(
             value = "Get a specific task by its ID",
             notes = "Task IDs are integer numbers.",
-            response = ResponseEntity[].class
+            response = Task.class
     )
     public ResponseEntity<Task> getTaskById(HttpServletRequest httpServletRequest,
                                             @ApiParam(value = "Provide a TaskID in Integer form such as 1,2,3 etc. ", required = true)
@@ -72,7 +72,7 @@ public class TaskController {
     @ApiOperation(
             value = "Delete a specific task by its ID",
             notes = "Task IDs are integer numbers.",
-            response = ResponseEntity[].class
+            response = Boolean.class
     )
     public ResponseEntity<Boolean> deleteTask(HttpServletRequest httpServletRequest,
                                               @ApiParam(value = "Provide a TaskID in Integer form such as 1,2,3 etc.", required = true)
