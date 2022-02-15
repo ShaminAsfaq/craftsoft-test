@@ -26,13 +26,13 @@ public class AgentServiceTest {
         assertEquals(expected, found);
     }
 
-    @Test
-    @DisplayName("ADD_EXCEPTION")
     /**
-     * This Test will fail if you run it. But if you run the entire class a test, it will pass. Because, it searches
+     * This Test will fail if you only run this. But if you run the entire class, it will pass. Because, it searches
      * for an Agent with userName "shamin" which is being created in the previous ADD test. This agent will not be in
      * the DB if you only run this test.
      */
+    @Test
+    @DisplayName("ADD_EXCEPTION")
     public void testAddAgentException() {
         Agent expected = new Agent();
         expected.setUserName("shamin");
