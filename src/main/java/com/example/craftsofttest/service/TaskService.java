@@ -101,12 +101,9 @@ public class TaskService {
 
     public boolean updateTaskStatus(int taskId, String taskStatusValue) throws Exception {
         TaskStatus taskStatus = TaskStatus.valueOfText(taskStatusValue);
-        System.out.println(taskStatus);
         Optional<Task> byId = taskRepository.findById(taskId);
         if (byId.isPresent()) {
             byId.get().setTaskStatus(taskStatus);
-            System.out.println(byId.get());
-            System.out.println(taskRepository.save(byId.get()));
             return true;
         } else {
             throw new Exception("No such task found.");

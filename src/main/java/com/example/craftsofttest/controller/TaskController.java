@@ -2,6 +2,8 @@ package com.example.craftsofttest.controller;
 
 import com.example.craftsofttest.service.TaskService;
 import com.example.craftsofttest.model.Task;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,31 +20,63 @@ public class TaskController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Task> addTask(HttpServletRequest httpServletRequest, @RequestBody Task task) {
+    @ApiOperation(
+            value = "Add a task",
+            notes = "Provide a Task to be saved",
+            response = ResponseEntity.class
+    )
+    public ResponseEntity<Task> addTask(HttpServletRequest httpServletRequest,
+                                        @ApiParam(value = "Task object to be saved in DB", required = true)
+                                        @RequestBody Task task) {
         Task addedTask = taskService.addTask(task);
         return ResponseEntity.ok().body(addedTask);
     }
 
     @PostMapping("/update")
-    public ResponseEntity<Boolean> updateTask(HttpServletRequest httpServletRequest, @RequestBody Task task) throws Exception {
+    @ApiOperation(
+            value = "Update a task",
+            notes = "Provide a Task to be updated",
+            response = ResponseEntity.class
+    )
+    public ResponseEntity<Boolean> updateTask(HttpServletRequest httpServletRequest,
+                                              @ApiParam(value = "Task object to be updated in DB", required = true)
+                                              @RequestBody Task task) throws Exception {
         boolean updatedTaskFlag = taskService.updateTask(task);
         return ResponseEntity.ok().body(updatedTaskFlag);
     }
 
     @GetMapping("/get/all")
+    @ApiOperation(
+            value = "Get all task as a list",
+            response = ResponseEntity[].class
+    )
     public ResponseEntity<List<Task>> getAllTask(HttpServletRequest httpServletRequest) {
         List<Task> allTask = taskService.getAllTask();
         return ResponseEntity.ok().body(allTask);
     }
 
     @GetMapping("/get/{taskId}")
-    public ResponseEntity<Task> getTaskById(HttpServletRequest httpServletRequest, @PathVariable int taskId) throws Exception {
+    @ApiOperation(
+            value = "Get a specific task by its ID",
+            notes = "Task IDs are integer numbers.",
+            response = ResponseEntity[].class
+    )
+    public ResponseEntity<Task> getTaskById(HttpServletRequest httpServletRequest,
+                                            @ApiParam(value = "Provide a TaskID in Integer form such as 1,2,3 etc. ", required = true)
+                                            @PathVariable int taskId) throws Exception {
         Task taskById = taskService.getTaskById(taskId);
         return ResponseEntity.ok().body(taskById);
     }
 
     @DeleteMapping("/delete/{taskId}")
-    public ResponseEntity<Boolean> deleteTask(HttpServletRequest httpServletRequest, @PathVariable int taskId) throws Exception {
+    @ApiOperation(
+            value = "Delete a specific task by its ID",
+            notes = "Task IDs are integer numbers.",
+            response = ResponseEntity[].class
+    )
+    public ResponseEntity<Boolean> deleteTask(HttpServletRequest httpServletRequest,
+                                              @ApiParam(value = "Provide a TaskID in Integer form such as 1,2,3 etc.", required = true)
+                                              @PathVariable int taskId) throws Exception {
         boolean deletedTaskFlag = taskService.deleteTask(taskId);
         return ResponseEntity.ok().body(deletedTaskFlag);
     }

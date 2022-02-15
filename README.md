@@ -20,11 +20,11 @@ After setting up the environment, you only need to import the project into Intel
 
 ## Future Improvements
 
-- **Task and SubTask**: If I knew more details about SubTask, I could have approached it another way. But, for now, the SubTask is also a Task. It could have been a separate class based on the nature of the SubTask in general.
+- **Task and SubTask**: If I knew more details about SubTask, I could have approached it another way. But, for now, the SubTask is also a Task. It can be a separate class based on the nature of the SubTask in general.
 - **Delete**: The deletion of a task is sensitive. Right now, I have deleted a task permanently from the Database, but as it is part of our data, we can keep the data intact but privately so that it is no more accessible to the end-users. It will depend on the requirements.
 - **TaskGroup**: A TaskGroup can be a separate model if I want to keep some more information about that category. Right now, I have kept it as an ENUM.
 - **Agent (Assignee)**: It is a separate model but has only two attributes right now. A **userName** String and an **email** String. Currently, **userName** is considered unique. But we can go for a unique ID depending on how we want to handle it.
-- **Unit Tests**: I didn't write tests for all of the available services, but covered the basic CRUD. The rest of the tests should also be similar.
-
+- **Unit Tests**: I didn't write tests for all the available services, but covered the basic CRUD. The rest of the tests should also be similar.
+- **Swagger**: I have added API descriptions to some APIs in **TaskController.java**  for demonstration purposes, but not in all of them. To visit the Swagger UI, run the project and visit: **[http://localhost:8080/swagger-ui/](http://localhost:8080/swagger-ui/)** (If you are running the project on a different port than the default 8080, you need to use that port in the URL)
 
 

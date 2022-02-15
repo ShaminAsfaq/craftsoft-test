@@ -1,5 +1,6 @@
 package com.example.craftsofttest.model;
 
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ApiModel(description = "Agent is someone we assign a task to")
 public class Agent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
